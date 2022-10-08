@@ -611,7 +611,7 @@
             document.getElementById('directory-space').prepend(newNode);
           });
           if (window.location.href.indexOf('/school/') != -1) {
-            joinSpace(window.location.href.substring(window.location.href.indexOf('/school/') + 6).replace('#',''));
+            joinSpace(window.location.href.substring(window.location.href.indexOf('/school/') + 8).replace('#',''));//number 8 is for the character count of "/school/"
           }
         }
       });
