@@ -610,8 +610,8 @@
             newNodeWrapper.appendChild(newNodeChild);
             document.getElementById('directory-space').prepend(newNode);
           });
-          if (window.location.href.indexOf('/sbhs/') != -1) {
-            joinSpace(window.location.href.substring(window.location.href.indexOf('/sbhs/') + 6).replace('#',''));
+          if (window.location.href.indexOf('/school/') != -1) {
+            joinSpace(window.location.href.substring(window.location.href.indexOf('/school/') + 6).replace('#',''));
           }
         }
       });
@@ -674,13 +674,13 @@
           url: '/logout',
           dataType: "json",
           success: function(data) {
-            window.location.href = "https://sbhs-platform.herokuapp.com";
+            window.location.href = "https://oneconnected.app";
           }
         });
       });
 
       $(document).on('click', '.home', function() {
-        window.history.pushState('', '', '/sbhs');
+        window.history.pushState('', '', '/school');
         $('#' + current_space).attr('style', '');
         current_space = '';
         current_room = '';
@@ -929,7 +929,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'self') {
-              window.location.href = "https://sbhs-platform.herokuapp.com";
+              window.location.href = "https://oneconnected.app";
             }
             popupSuccess();
            }
@@ -1830,7 +1830,7 @@
       });
 
       socket.on("space_invite", function (data) {
-        navigator.clipboard.writeText('https://sbhs-platform.herokuapp.com/invite/' + data['_id']);
+        navigator.clipboard.writeText('https://oneconnected.app/invite/' + data['_id']);
         if (data['user'] == user_id) {
           popupSuccess();
         }
@@ -1957,7 +1957,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             leaveSpaceModal.style.display = 'none';
-            window.history.pushState('', '', '/sbhs'); //l
+            window.history.pushState('', '', '/school'); //l
             $('#first-all').css('display', 'none');
             $("#home-page").show();
             $("#" + current_space).parent().remove();
@@ -2441,7 +2441,7 @@
           data: JSON.stringify({'space_id': current_space}),
           contentType: 'application/json;charset=UTF-8',
           success: function(rooms_and_sections) {
-            window.history.pushState('', '', '/sbhs/' + current_space);
+            window.history.pushState('', '', '/school/' + current_space);
             applyTheme(rooms_and_sections[3][0].theme);
             if (rooms_and_sections[3][0].admins[0] == user_id) {
               space_admin = true;
