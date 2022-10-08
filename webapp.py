@@ -395,11 +395,11 @@ def send_email():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST' and (space_admin() or server_admin()):
-        sender_email = 'sbhs.platform.test@gmail.com'
+        sender_email = 'oneconnected.application@gmail.com'
         password = os.environ['EMAIL_ACCESS_PASSWORD']
         message = MIMEMultipart('alternative')
         message['Subject'] = request.json['subject'][:70]
-        message['From'] =  'Platform Test'
+        message['From'] =  'One Connected'
         recipients = request.json['to']
         stored_recipients = list(set(recipients))
         stored_recipients.reverse()
