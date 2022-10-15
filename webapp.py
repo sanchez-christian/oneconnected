@@ -607,7 +607,7 @@ def delete_message():
         return 'expired', 200
     if request.method == 'POST':
         deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        if deleted_message['user_id'] == session['unique_id']:
+        if deleted_message['user_id'] == session['unique_id'] or space_admin() or server_admin():
             deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
             document_list = list(deleted_email)
             message_index = document_list.index(deleted_message)
@@ -1005,7 +1005,7 @@ def deleted_message(data):
     if session_expired() or banned():
         emit('expired')
         return
-    if session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
+    if space_admin() or server_admin() or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
         socketio.emit('deleted_message', data, room = data['room_id'])
     else:
         session['logged'] = False
