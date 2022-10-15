@@ -918,7 +918,7 @@ def send_message(data):
     if space_member() and valid_room(data['room_id']):
         utc_dt = datetime.now().isoformat() + 'Z'
         data['datetime'] = utc_dt
-        data['message'] = profanity.censor(re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'][:2000]))
+        data['message'] = profanity.censor(re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'][:2000]), '#')
         data['message_id'] = str(ObjectId())
         data['user_id'] = session['unique_id']
         data['picture'] = session['picture']
