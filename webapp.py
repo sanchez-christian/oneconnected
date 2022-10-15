@@ -918,7 +918,7 @@ def send_message(data):
     if space_member() and valid_room(data['room_id']):
         utc_dt = datetime.now().isoformat() + 'Z'
         data['datetime'] = utc_dt
-        data['message'] = re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'][:2000])
+        data['message'] = profanity.censor(re.sub('\\\n\\n\\\n+', '\\n\\n', data['message'][:2000]))
         data['message_id'] = str(ObjectId())
         data['user_id'] = session['unique_id']
         data['picture'] = session['picture']
@@ -932,7 +932,7 @@ def send_message(data):
                 data['combine'] = 'false'
         except:
             data['combine'] = 'false'
-        collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'user_id': data['user_id'], 'picture': data['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': profanity.censor(data['message']), 'combine': data['combine'], 'email': session['users_email']})
+        collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'user_id': data['user_id'], 'picture': data['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email']})
         socketio.emit('receive_message', data, room = data['room_id'])
     else:
         session['logged'] = False
