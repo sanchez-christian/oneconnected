@@ -604,7 +604,7 @@ def join_space():
 # When a message is deleted, send that message data to all
 # users in the space.
 
-@socketio.on('deleted_message')
+@socketio.on('delete_message')
 def deleted_message(data):
     if session_expired() or banned():
         emit('expired')
