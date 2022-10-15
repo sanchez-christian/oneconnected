@@ -674,7 +674,7 @@
           url: '/logout',
           dataType: "json",
           success: function(data) {
-            window.location.href = "https://oneconnected.herokuapp.com";
+            window.location.href = "https://www.oneconnected.app";
           }
         });
       });
@@ -929,7 +929,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             if (data['success'] == 'self') {
-              window.location.href = "https://oneconnected.herokuapp.com";
+              window.location.href = "https://www.oneconnected.app";
             }
             popupSuccess();
            }
@@ -1830,7 +1830,7 @@
       });
 
       socket.on("space_invite", function (data) {
-        navigator.clipboard.writeText('https://oneconnected.herokuapp.com/invite/' + data['_id']);
+        navigator.clipboard.writeText('https://www.oneconnected.app/invite/' + data['_id']);
         if (data['user'] == user_id) {
           popupSuccess();
         }
