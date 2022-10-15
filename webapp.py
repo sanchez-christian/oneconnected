@@ -609,7 +609,7 @@ def deleted_message(data):
     if session_expired() or banned():
         emit('expired')
         return 
-    if session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id'] or space_admin() or server_admin():
+    if session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id']['user_id'])}) or space_admin() or server_admin():
         socketio.emit('deleted_message', data, room = data['room_id'])
     else:
         session['logged'] = False
