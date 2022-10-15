@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  
   <head>
     <!--Disables zoom, may need a workaround if it reduces accessibility: https://stackoverflow.com/questions/4472891/how-can-i-disable-zoom-on-a-mobile-web-page-->
     <meta charset="utf-8">
@@ -13,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js" integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://wzrd.in/standalone/copy-to-clipboard@latest" async></script>
     <title>Santa Barbara High School</title>
   </head>
   <body>
@@ -430,6 +432,7 @@
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.4.1/socket.io.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+  
   <script type="text/javascript" charset="utf-8">
     //Give small space to empty categories room-group 
     $(document).ready(function() {
@@ -1829,8 +1832,8 @@
         socket.emit("space_invite"); 
       });
 
-      socket.on("space_invite",async function (data) {
-        await navigator.clipboard.writeText('https://www.oneconnected.app/invite/' + data['_id']);
+      socket.on("space_invite", async function (data) {    
+        copy('https://www.oneconnected.app/invite/' + data['_id']);
         if (data['user'] == user_id) {
           popupSuccess();
         }
