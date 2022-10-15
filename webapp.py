@@ -601,6 +601,21 @@ def join_space():
 # change the combine status of it to false.
 # TODO: Add deleted message to the report collection in MongoDB.
 
+# When a message is deleted, send that message data to all
+# users in the space.
+
+@socketio.on('deleted_message')
+def deleted_message(data):
+    if session_expired() or banned():
+        emit('expired')
+        return 
+    if session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id'] or space_admin() or server_admin():
+        socketio.emit('deleted_message', data, room = data['room_id'])
+    else:
+        session['logged'] = False
+        session.clear()
+        emit('expired')
+        
 @app.route('/delete_message', methods=['GET', 'POST']) #space admin and message in space
 def delete_message():
     if session_expired() or banned():
@@ -992,21 +1007,6 @@ def created_section(data):
     if space_admin() or server_admin():
         for room in room_list():
             socketio.emit('deleted_section', data, room = room)
-    else:
-        session['logged'] = False
-        session.clear()
-        emit('expired')
-
-# When a message is deleted, send that message data to all
-# users in the space.
-
-@socketio.on('deleted_message')
-def deleted_message(data):
-    if session_expired() or banned():
-        emit('expired')
-        return
-    if space_admin() or server_admin() or session['unique_id'] == collection_messages.find_one({'_id': ObjectId(data['message_id'])})['user_id']:
-        socketio.emit('deleted_message', data, room = data['room_id'])
     else:
         session['logged'] = False
         session.clear()
