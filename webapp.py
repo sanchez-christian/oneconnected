@@ -607,7 +607,7 @@ def delete_message():
         return 'expired', 200
     if request.method == 'POST':
         deleted_message = collection_messages.find_one({'_id': ObjectId(request.json['message_id'])})
-        if deleted_message['user_id'] == session['unique_id'] or space_admin() or server_admin():
+        if deleted_message['user_id'] == session['unique_id']:
             deleted_email = collection_messages.find({'room': request.json['room_id'], 'email': deleted_message['email']}).sort('_id', pymongo.DESCENDING)
             document_list = list(deleted_email)
             message_index = document_list.index(deleted_message)
