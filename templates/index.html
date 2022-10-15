@@ -2061,7 +2061,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function (deleted_message) {
             deleteMessageModal.style.display = "none";
-            socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
+            socket.emit('delete_message', {'message_id': message_id, 'room_id': current_room});
           }
         });
       });
