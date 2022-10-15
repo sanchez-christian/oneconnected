@@ -1827,10 +1827,10 @@
 
       $(document).on('click', '#invite-link-button', function() {
         socket.emit("space_invite"); 
-        navigator.clipboard.writeText('https://www.oneconnected.app/invite/' + data['_id']);
       });
 
       socket.on("space_invite", function (data) {
+        navigator.clipboard.write('https://www.oneconnected.app/invite/' + data['_id']);
         if (data['user'] == user_id) {
           popupSuccess();
         }
