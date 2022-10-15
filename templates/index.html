@@ -1831,8 +1831,8 @@
         socket.emit("space_invite"); 
       });
 
-      socket.on("space_invite", async function (data) {    
-        await navigator.clipboard.writeText('https://www.oneconnected.app/invite/' + data['_id']);
+      socket.on("space_invite", function (data) {    
+        navigator.clipboard.writeText('https://www.oneconnected.app/invite/' + data['_id']);
         if (data['user'] == user_id) {
           popupSuccess();
         }
@@ -2059,7 +2059,7 @@
           dataType: 'json',
           data: JSON.stringify({'message_id': message_id, 'room_id': current_room}),//
           contentType: 'application/json;charset=UTF-8',
-          success: function (delete_message) {
+          success: function (deleted_message) {
             deleteMessageModal.style.display = "none";
             socket.emit('deleted_message', {'message_id': message_id, 'room_id': current_room});
           }
