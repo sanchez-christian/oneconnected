@@ -1833,7 +1833,7 @@
       });
 
       socket.on("space_invite", async function (data) {    
-        copy('https://www.oneconnected.app/invite/' + data['_id']);
+        await copy('https://www.oneconnected.app/invite/' + data['_id']);
         if (data['user'] == user_id) {
           popupSuccess();
         }

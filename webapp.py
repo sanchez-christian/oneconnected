@@ -22,6 +22,9 @@ from datetime import datetime, date, timedelta
 import pytz
 from pytz import timezone
 
+from better_profanity import profanity
+
+
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -908,6 +911,7 @@ def stopped_typing(data):
 
 @socketio.on('send_message')
 def send_message(data):
+    profanity.load_censor_words();
     if session_expired() or banned():
         emit('expired')
         return
@@ -928,7 +932,7 @@ def send_message(data):
                 data['combine'] = 'false'
         except:
             data['combine'] = 'false'
-        collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'user_id': data['user_id'], 'picture': data['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': data['message'], 'combine': data['combine'], 'email': session['users_email']})
+        collection_messages.insert_one({'_id': ObjectId(data['message_id']), 'name': data['name'], 'user_id': data['user_id'], 'picture': data['picture'], 'room': data['room_id'], 'datetime': utc_dt, 'message': profanity.censor(data['message']), 'combine': data['combine'], 'email': session['users_email']})
         socketio.emit('receive_message', data, room = data['room_id'])
     else:
         session['logged'] = False
