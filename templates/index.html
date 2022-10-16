@@ -803,11 +803,13 @@
         $('#administrator-page').css('display', 'block');
         $('#admin-logs-table').css('display', 'none');
         $('#admin-users-table').css('display', 'table');
+        $('#admin-pending-table').css('display', 'none');
         $('#admin-settings-table').css('display', 'none');
         $('#admin-filters').css('display', 'none');
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('#admin-pending-body').empty();
         $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $(this).addClass('admin-tab-selected');
@@ -888,11 +890,13 @@
         $('#administrator-page').css('display', 'block');
         $('#admin-logs-table').css('display', 'none');
         $('#admin-users-table').css('display', 'none');
+        $('#admin-users-pending').css('display', 'none');
         $('#admin-settings-table').css('display', 'table');
         $('#admin-filters').css('display', 'none');
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('#admin-pending-body').empty();
         $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $(this).addClass('admin-tab-selected');
@@ -1084,6 +1088,7 @@
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('#admin-pending-body').empty();
       });
       
       /* Does not work for laptops or computers, need to check compatibility with wider-screen tablets */
