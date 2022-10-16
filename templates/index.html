@@ -142,10 +142,11 @@
         <table class="admin-table" id="admin-pending-table">
           <thead>
             <tr>
-              <th width="25%">User</th>
-              <th width="25%">Email</th>
-              <th width="25%">Space</th>
-              <th width="20%">Status</th>
+              <th width="20%">User</th>
+              <th width="20%">Email</th>
+              <th width="20%">Space Name</th>
+              <th width="20%">Space Description</th>
+              <th width="15%">Status</th>
             </tr>
           </thead>
           <tbody id="admin-pending-body">
@@ -718,11 +719,13 @@
         $('#administrator-page').css('display', 'block');
         $('#admin-logs-table').css('display', 'table');
         $('#admin-users-table').css('display', 'none');
+        $('#admin-pending-table').css('display', 'none');
         $('#admin-settings-table').css('display', 'none');
         $('#admin-filters').css('display', 'block');
         $('#admin-logs-body').empty();
         $('#admin-users-body').empty();
         $('#admin-settings-body').empty();
+        $('#admin-pending-body').empty();
         $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $('#admin-logs').addClass('admin-tab-selected');
@@ -1755,10 +1758,8 @@
       });
 
       document.getElementById('create-space-form').onsubmit = function (e) {
-        alert("Your request to make a space has been received. After being reviewed by school officials, your request will be approved and your space will be displayed on the Club Directory.")
-
-
-        /* Used for the creation of spaces (once approved by school official).
+        /*alert("Your request to make a space has been received. After being reviewed by school officials, your request will be approved and your space will be displayed on the Club Directory.")
+        Used for the creation of spaces (once approved by school official). gonna be used for space verification*/
         e.preventDefault();
         let space_name = document.getElementById('space-name').value.trim();
         let space_image = document.getElementById('space-picture').value.trim();
@@ -1798,7 +1799,7 @@
               }
             }
           });
-        }*/
+        }
       }
 
       $(document).on('click', '#space-settings-button', function() {
