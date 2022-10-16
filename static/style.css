@@ -1500,6 +1500,12 @@ img { /* make images and create button undraggable and unhighlitable*/
   display: inline-block;
   margin-left: 24px;
 }
+#admin-pending {
+  line-height: 48px;
+  display: inline-block;
+  margin-left: 24px;
+}
+
 #admin-logs {
   display: inline-block;
   margin-left: 24px;
