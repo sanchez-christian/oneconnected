@@ -663,6 +663,15 @@ def report_message():
 #When a user submits a space creation request, add the request to the database.
 
 @app.route('/approve_space', methods=['GET', 'POST'])
+def approve_space():
+    if session_expired() or banned():
+        return 'expired', 200
+    if request.method == 'POST':
+        collection_spaceRequests.insert_one({'by': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'space_name': requests.json['space_name'], 'space_image': requests.json['space_iamge'], 'space_description': request.json['space_description']})
+        return Response(dumps({'success': 'true'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
     
 # When user accesses another user's profile,
 # return their public profile data.
