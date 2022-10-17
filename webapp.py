@@ -103,8 +103,6 @@ def render_login():
         return redirect(url_for('render_main_page'))
     if request.args.get('error') != None:
         return render_template('login.html', login_error = request.args.get('error'))
-    #if 'https://oneconnected.herokuapp.com' in request.url:
-        #return redirect('https://www.oneconnected.app')
     return render_template('login.html')
 
 
