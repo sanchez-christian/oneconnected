@@ -79,6 +79,7 @@
       <div id="feed" class="home-grid"></div>
       <div id="direct-messaging" class="home-grid"></div>-->
     </div>
+
     <div id="administrator-page">
       <div class="main-header">
         <div id="admin-settings" class="admin-tab pointer">Settings</div>
@@ -91,7 +92,18 @@
         <textarea id="admin-search-bar" placeholder="Search..."></textarea>
         <img src="/static/images/temporary-search.png" id="admin-search-button" class="pointer">
       </div>
-      
+      <div id="admin-filters">
+        <form class="no-drag">
+          <input type="checkbox" class="admin-log-filters" id="deleted-message-filter" name="deleted-message-filter" checked>
+          <label for="deleted-message-filter">Deleted messages</label>
+          <input type="checkbox" class="admin-log-filters" id="reported-message-filter" name="reported-message-filter" checked>
+          <label for="reported-message-filter">Reported messages</label>
+          <input type="checkbox" class="admin-log-filters" id="edited-message-filter" name="edited-message-filter" checked>
+          <label for="edited-message-filter">Edited messages (before change)</label>
+          <input type="checkbox" class="admin-log-filters" id="expand-message-filter" name="expand-message-filter">
+          <label for="expand-message-filter">Expand all</label>
+        </form>
+      </div>
       <div id="admin-table-wrapper">
         <table class="admin-table" id="admin-settings-table">
           <thead>
@@ -141,18 +153,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-    <div id="admin-filters">
-      <form class="no-drag">
-        <input type="checkbox" class="admin-log-filters" id="deleted-message-filter" name="deleted-message-filter" checked>
-        <label for="deleted-message-filter">Deleted messages</label>
-        <input type="checkbox" class="admin-log-filters" id="reported-message-filter" name="reported-message-filter" checked>
-        <label for="reported-message-filter">Reported messages</label>
-        <input type="checkbox" class="admin-log-filters" id="edited-message-filter" name="edited-message-filter" checked>
-        <label for="edited-message-filter">Edited messages (before change)</label>
-        <input type="checkbox" class="admin-log-filters" id="expand-message-filter" name="expand-message-filter">
-        <label for="expand-message-filter">Expand all</label>
-      </form>
     </div>
 
     <!--Spaces Page-->
