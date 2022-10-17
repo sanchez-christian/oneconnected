@@ -48,10 +48,10 @@ collection_spaces = db['Spaces']
 collection_rooms = db['Rooms']
 collection_messages = db['Messages']
 collection_sections = db['Sections']
-#collection_deleted = db['Deleted Messages']
 collection_logs = db['Logs']
 collection_emails = db['Emails']
 collection_invites = db['Invites']
+collection_spaceRequests = db['SpaceRequest']
 
 # Support SSL termination. Mutate the host_url within Flask to use https://
 # if the SSL was terminated.
@@ -659,6 +659,10 @@ def report_message():
     session['logged'] = False
     session.clear()
     return 'not allowed', 405
+
+#When a user submits a space creation request, add the request to the database.
+
+@app.route('/approve_space', methods=['GET', 'POST'])
     
 # When user accesses another user's profile,
 # return their public profile data.
