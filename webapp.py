@@ -99,6 +99,8 @@ def set_session_lifetime():
 def render_login():
     if 'http://' in request.url:
         return redirect(request.url.replace('http://', 'https://', 1), 301)
+    if 'https://oneconnected.herokuapp.com' in request.url:
+        return redirect(request.url.replace('https://oneconnected.herokuapp.com', 'https://www.oneconnected.app', 1), 301)
     if not session_expired():
         return redirect(url_for('render_main_page'))
     if request.args.get('error') != None:
@@ -522,6 +524,8 @@ def delete_section():
 # Adds the newly created space, default room, and default
 # section to MongoDB.
 # Returns the room and section data.
+()
+@app.route('/request_space', methods=)
 
 @app.route('/create_space', methods=['GET', 'POST']) #Check if space with name already exists...
 def create_space():
