@@ -899,24 +899,24 @@
             let newNodeChild = document.createElement('td');
             let newNodeChildChild = document.createElement('img');
             newNodeChildChild.className = 'profile-picture';
-            newNodeChildChild.src = item.picture;
+            newNodeChildChild.src = item['picture'];
             newNodeChild.appendChild(newNodeChildChild);
-            newNodeChild.appendChild(document.createTextNode(' ' + item.name))
+            newNodeChild.appendChild(document.createTextNode(' ' + item['by']))
             newNode.appendChild(newNodeChild);
 
             newNodeChild = document.createElement('td');
-            newNodeChild.textContent = item.email;
+            newNodeChild.textContent = item['email'];
             newNode.appendChild(newNodeChild);
 
             newNodeChildChild = document.createElement('img');
             newNodeChildChild.className = 'profile-picture';
-            newNodeChildChild.src = item.space_image;
+            newNodeChildChild.src = item['space_image'];
             newNodeChild.appendChild(newNodeChildChild);
-            newNodeChild.appendChild(document.createTextNode(' ' + item.space_name))
+            newNodeChild.appendChild(document.createTextNode(' ' + item['space_name']))
             newNode.appendChild(newNodeChild);
 
             newNodeChild = document.createElement('td');
-            newNodeChild.textContent = item.space_description
+            newNodeChild.textContent = item['space_description']
             newNode.appendChild(newNodeChild);
 
             newNodeChild = document.createElement('td');
