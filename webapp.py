@@ -667,7 +667,7 @@ def approve_space():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
-        collection_spaceRequests.insert_one({'by': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'space_name': request.json['space_name'], 'space_image': request.json['space_iamge'], 'space_description': request.json['space_description'], 'status': 'unapproved'})
+        collection_spaceRequests.insert_one({'by': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'space_name': request.json['space_name'], 'space_image': request.json['space_image'], 'space_description': request.json['space_description'], 'status': 'unapproved'})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     session['logged'] = False
     session.clear()
