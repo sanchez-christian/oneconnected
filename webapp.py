@@ -758,16 +758,16 @@ def server_users():
     session.clear()
     return 'not allowed', 405
 
-# @app.route('/server_spaceApproval', methods=['GET', 'POST'])
-# def server_users():
-#     if session_expired() or banned():
-#         return 'expired', 200
-#     if request.method == 'POST' and server_admin():
-#         requests = dumps(list(collection_spaceRequests.find().sort('_id', pymongo.DESCENDING)))
-#         return Response(requests, mimetype='application/json')
-#     session['logged'] = False
-#     session.clear()
-#     return 'not allowed', 405
+@app.route('/server_spaceApproval', methods=['GET', 'POST'])
+def server_spaceApproval():
+    if session_expired() or banned():
+        return 'expired', 200
+    if request.method == 'POST' and server_admin():
+        requests = dumps(list(collection_spaceRequests.find().sort('_id', pymongo.DESCENDING)))
+        return Response(requests, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
 
 @app.route('/admin_change_user_status', methods=['GET', 'POST'])
 def admin_change_user_status():
