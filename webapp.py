@@ -668,7 +668,7 @@ def approve_space():
         return 'expired', 200
     if request.method == 'POST':
         try:
-            if not requests.head(request.json['space_name']).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(data['space_picture'], stream = True).headers['Content-length']) > 6000000:
+            if not requests.head(request.json['space_name']).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(request.json['space_name'], stream = True).headers['Content-length']) > 6000000:
                 request.json['space_image'] = '/static/images/Space.jpeg'
         except:
             request.json['space_image'] = '/static/images/Space.jpeg'
