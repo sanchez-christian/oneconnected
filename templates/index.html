@@ -882,7 +882,8 @@
         $('.admin-tab').removeClass('admin-tab-selected');
         $(this).addClass('admin-tab-selected');
       });
-      abortRequests();
+      
+      /*abortRequests();
       requests.push($.ajax({
         type: "POST",
         url: '/server_spaceApproval',
@@ -913,6 +914,7 @@
           document.getElementById('admin-users-body').appendChild(newFragment);
         }
       }));
+      */
       $(document).on('click', '#admin-settings', function() {
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'none');
