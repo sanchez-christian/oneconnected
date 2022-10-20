@@ -881,54 +881,54 @@
         $('#admin-search-bar').val('');
         $('.admin-tab').removeClass('admin-tab-selected');
         $(this).addClass('admin-tab-selected');
+      
+        abortRequests();
+        requests.push($.ajax({
+          type: "POST",
+          url: '/server_spaceApproval',
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+            const newFragment = document.createDocumentFragment();
+            data.forEach(function (item) {
+              let formNode = '';
+              formNode = '<form class="approve-space"><input type="checkbox"></form>';
+              let newNode = document.createElement('tr');
+              newNode.className = 'admin-pending-table-row';
+              //newNode.setAttribute('data-id', item._id);
+              let newNodeChild = document.createElement('td');
+              let newNodeChildChild = document.createElement('img');
+              newNodeChildChild.className = 'profile-picture';
+              newNodeChildChild.src = item['picture'];
+              newNodeChild.appendChild(newNodeChildChild);
+              newNodeChild.appendChild(document.createTextNode(' ' + item['by']))
+              newNode.appendChild(newNodeChild);
+
+              newNodeChild = document.createElement('td');
+              newNodeChild.textContent = item['email'];
+              newNode.appendChild(newNodeChild);
+
+              newNodeChildChild = document.createElement('img');
+              newNodeChildChild.className = 'profile-picture';
+              newNodeChildChild.src = item['space_image'];
+              newNodeChild.appendChild(newNodeChildChild);
+              newNodeChild.appendChild(document.createTextNode(' ' + item['space_name']))
+              newNode.appendChild(newNodeChild);
+
+              newNodeChild = document.createElement('td');
+              newNodeChild.textContent = item['space_description']
+              newNode.appendChild(newNodeChild);
+
+              newNodeChild = document.createElement('td');
+              newNodeChild.innerHTML = formNode;
+              newNode.appendChild(newNodeChild);
+              newFragment.appendChild(newNode);
+              //newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
+            });
+            document.getElementById('admin-pending-body').appendChild(newFragment);
+          }
+        }));
       });
       
-      abortRequests();
-      requests.push($.ajax({
-        type: "POST",
-        url: '/server_spaceApproval',
-        contentType: 'application/json;charset=UTF-8',
-        success: function(data) {
-          const newFragment = document.createDocumentFragment();
-          data.forEach(function (item) {
-            let formNode = '';
-            formNode = '<form class="approve-space"><input type="checkbox"></form>';
-            let newNode = document.createElement('tr');
-            newNode.className = 'admin-pending-table-row';
-            //newNode.setAttribute('data-id', item._id);
-            let newNodeChild = document.createElement('td');
-            let newNodeChildChild = document.createElement('img');
-            newNodeChildChild.className = 'profile-picture';
-            newNodeChildChild.src = item['picture'];
-            newNodeChild.appendChild(newNodeChildChild);
-            newNodeChild.appendChild(document.createTextNode(' ' + item['by']))
-            newNode.appendChild(newNodeChild);
-
-            newNodeChild = document.createElement('td');
-            newNodeChild.textContent = item['email'];
-            newNode.appendChild(newNodeChild);
-
-            newNodeChildChild = document.createElement('img');
-            newNodeChildChild.className = 'profile-picture';
-            newNodeChildChild.src = item['space_image'];
-            newNodeChild.appendChild(newNodeChildChild);
-            newNodeChild.appendChild(document.createTextNode(' ' + item['space_name']))
-            newNode.appendChild(newNodeChild);
-
-            newNodeChild = document.createElement('td');
-            newNodeChild.textContent = item['space_description']
-            newNode.appendChild(newNodeChild);
-
-            newNodeChild = document.createElement('td');
-            newNodeChild.innerHTML = formNode;
-            newNode.appendChild(newNodeChild);
-            newFragment.appendChild(newNode);
-            //newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
-          });
-          document.getElementById('admin-pending-body').appendChild(newFragment);
-        }
-      }));
-
       $(document).on('click', '#admin-settings', function() {
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'none');
