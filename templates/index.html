@@ -910,7 +910,8 @@
               newNodeChild = document.createElement('td')
               newNodeChildChild = document.createElement('img');
               newNodeChildChild.className = 'profile-picture';
-              newNodeChildChild.src = item['space_image'];
+              if(item['space_image']
+                newNodeChildChild.src = item['space_image'];
               newNodeChild.appendChild(newNodeChildChild);
               newNodeChild.appendChild(document.createTextNode(' ' + item['space_name']))
               newNode.appendChild(newNodeChild);

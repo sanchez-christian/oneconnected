@@ -667,7 +667,12 @@ def approve_space():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
-        collection_spaceRequests.insert_one({'by': session['users_name'], 'picture': session['picture'], 'user_id': session['unique_id'], 'email': session['users_email'], 'space_name': request.json['space_name'], 'space_image': request.json['space_image'], 'space_description': request.json['space_description'], 'status': 'unapproved'})
+        try:
+            if not requests.head(request.json['space_name']).headers["content-type"] in ("image/png", "image/jpeg", "image/jpg", "image/gif", "image/avif", "image/webp", "image/svg") or int(requests.get(data['space_picture'], stream = True).headers['Content-length']) > 6000000:
+                request.json['space_name'] = '/static/images/Space.jpeg'
+        except:
+            request.json['space_name'] = '/static/images/Space.jpeg'
+        collection_spaceRequests.insert_one({'by': session['users_name'], 'picture': session['picture'], 'user_id': session['unique_id'], 'email': session['users_email'], 'space_name': request.json['space_name'], 'space_image': request.json['space_image'], 'space_description': request.json['space_description']})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     session['logged'] = False
     session.clear()
