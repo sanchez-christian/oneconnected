@@ -1757,7 +1757,7 @@
         }
       });
 
-      document.getElementById('create-space-form').onsubmit(function(){
+      document.getElementById('create-space-form').onsubmit = function (e) {
         alert("Your request to make a space has been received. After being reviewed by school officials, your request will be approved and your space will be displayed on the Club Directory.")
         let space_name = document.getElementById('space-name').value.trim();
         let space_image = document.getElementById('space-picture').value.trim();
@@ -1769,9 +1769,12 @@
           data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
+            if (data['success'] == 'true'){
+              alert("success")
+            }
           }
-        })
-      })
+        });
+      }
         /*Used for the creation of spaces (once approved by school official). gonna be used for space verification
         e.preventDefault();
         let space_name = document.getElementById('space-name').value.trim();
