@@ -667,7 +667,7 @@ def approve_space():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
-        collection_spaceRequests.insert_one({'by': session['users_name'], 'user_id': session['unique_id'], 'email': session['users_email'], 'space_name': request.json['space_name'], 'space_image': request.json['space_image'], 'space_description': request.json['space_description'], 'status': 'unapproved'})
+        collection_spaceRequests.insert_one({'by': session['users_name'], 'picture': session['picture'], 'user_id': session['unique_id'], 'email': session['users_email'], 'space_name': request.json['space_name'], 'space_image': request.json['space_image'], 'space_description': request.json['space_description'], 'status': 'unapproved'})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
     session['logged'] = False
     session.clear()
@@ -754,6 +754,17 @@ def server_users():
     if request.method == 'POST' and server_admin():
         users = dumps(list(collection_users.find().sort('_id', pymongo.DESCENDING)))
         return Response(users, mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
+
+@app.route('/server_spaceApproval', methods=['GET', 'POST'])
+def server_users():
+    if session_expired() or banned():
+        return 'expired', 200
+    if request.method == 'POST' and server_admin():
+        requests = dumps(list(collection_spaceRequests.find().sort('_id', pymongo.DESCENDING)))
+        return Response(requests, mimetype='application/json')
     session['logged'] = False
     session.clear()
     return 'not allowed', 405
