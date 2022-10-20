@@ -146,7 +146,7 @@
               <th width="20%">Email</th>
               <th width="20%">Space Name</th>
               <th width="20%">Space Description</th>
-              <th width="15%">Status</th>
+              <th width="15%">Approved?</th>
             </tr>
           </thead>
           <tbody id="admin-pending-body">
@@ -907,6 +907,7 @@
               newNodeChild.textContent = item['email'];
               newNode.appendChild(newNodeChild);
 
+              newNodeChild = document.createElement('td')
               newNodeChildChild = document.createElement('img');
               newNodeChildChild.className = 'profile-picture';
               newNodeChildChild.src = item['space_image'];
@@ -928,7 +929,7 @@
           }
         }));
       });
-      
+
       $(document).on('click', '#admin-settings', function() {
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'none');
