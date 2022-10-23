@@ -568,19 +568,8 @@
       });
 
       let acceptPoliciesModal = document.getElementById("confirm-accept-policies");
-      
+
       document.getElementById('confirm-accept-policies').style.display = "block"
-      
-      $.ajax({
-        type:'POST',
-        url: '/display_policies',
-        contentType: 'application/json;charset=UTF-8',
-        success: function(data) {
-          if(data['agreed'] = 'true') {
-            document.getElementById('confirm-accept-policies').style.display = "none";
-          }
-        }
-      });
 
       $(document).on('click', '#confirm-accept-policies-button', function() {
         $.ajax({
@@ -596,6 +585,7 @@
                 window.location.href = "https://www.oneconnected.app";
               }
             });
+            document.getElementById('confirm-accept-policies').style.display = "none";
           }
         });
       });
