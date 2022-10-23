@@ -574,6 +574,15 @@
           url: '/accept_policies',
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
+            if('success' == 'true') {
+              $.ajax({
+                type:'POST',
+                url: '/logout',
+                contentType: 'application/json;charset=UTF-8',
+                success: function(data) {
+                }
+              });
+            }
           }
         });
       });
