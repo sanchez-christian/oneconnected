@@ -362,11 +362,11 @@
       </div>
     </div>
     <!--New Modals Here-->
-    <div id="confirm-delete-message" class="modal"> 
+    <div id="confirm-accept-policies" class="modal"> 
       <div class="modal-content">
         <span id="close-confirm-accept-policies" class="close">&times;</span>
-        <p class="modal-header">Are you sure you want to delete this message?</p>
-        <div class="confirm-button" id="confirm-delete-message-button">Confirm</div>
+        <p class="modal-header">You will be logged out and must log back in once you answer the following question. Do you agree to our <a href="https://privacypolicy.oneconnected.repl.co">privacy policy</a> and <a href="https://cookiepolicy.oneconnected.repl.co">cookie policy</a>?</p>
+        <div class="confirm-button" id="confirm-accept-policies">Yes</div>
       </div>
     </div>
     <div id="confirm-delete-space" class="modal">  <!--Backend check for character limit and other security-->
@@ -377,6 +377,13 @@
           <input type="text" id="confirm-space-name"  maxlength="200"><br>
           <input type="submit" value="Submit">
         </form>
+      </div>
+    </div>
+    <div id="confirm-approve-space" class="modal"> 
+      <div class="modal-content">
+        <span id="close-confirm-approve-space" class="close">&times;</span>
+        <p class="modal-header">Are you sure you want to delete this message?</p>
+        <div class="confirm-button" id="confirm-approve-space-button">Confirm</div>
       </div>
     </div>
     <div id="confirm-leave-space" class="modal">
@@ -868,6 +875,7 @@
           }
         }));
       });
+      
       $(document).on('click', '#admin-pending', function() {
         $('.active-space').attr('style', '');
         $('#home-page').css('display', 'none');
