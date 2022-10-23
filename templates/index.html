@@ -568,8 +568,6 @@
       });
 
       let acceptPoliciesModal = document.getElementById("confirm-accept-policies");
-      
-      document.getElementById('confirm-accept-policies').style.display = "block"
 
       $(document).on('click', '#close-confirm-accept-policies', function() {
         $.ajax({
@@ -610,6 +608,8 @@
           }
         }
       });
+
+      document.getElementById('confirm-accept-policies').style.display = "block"
 
       $.ajax({
         type: 'POST',
