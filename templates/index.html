@@ -1854,7 +1854,7 @@
       });
 
       let approveSpaceModal = document.getElementById("confirm-approve-space")
-      document.getElementbyId('.approve-space').checked(function () {
+      $(document).on('checked', '.approve-space', function () {
         approveSpaceModal.style.display = "block";
       });
       
