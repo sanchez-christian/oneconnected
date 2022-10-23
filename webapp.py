@@ -262,7 +262,8 @@ def display_policies():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
-        data = collection_users.find_one({'_id': session['unique_id']})
+        profile = collection_users.find_one({'_id': session['unique_id']})
+        data = profile['agreed']
         return Response(dumps(data), mimetype='application/json')
     session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
     session.clear()
