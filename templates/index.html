@@ -1883,7 +1883,7 @@
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
           }
-        })
+        });
       }
       
       let approveSpaceModal = document.getElementById("confirm-approve-space")
@@ -1918,10 +1918,7 @@
                 data: JSON.stringify({'request_owner_id': data['user_id'],'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
                 contentType: 'application/json;charset=UTF-8',
                 success: function(data) {
-                  if ('success' in data) {
-                    alert('that user had');
-                  }
-                  else {
+                  /*else {
                     document.getElementById("create-space").style.display = "none";
                     $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
                     $(document.getElementById(current_space)).attr('style', '');
@@ -1940,7 +1937,7 @@
                     newNode.appendChild(newNodeChild);
                     referenceNode = document.getElementById('space_align_helper');
                     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-                    current_space = data.space_id;
+                    current_space = data.space_id;*/
                   }
                 }
               });
