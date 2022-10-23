@@ -571,7 +571,7 @@ def create_space():
                 space_image = '/static/images/Space.jpeg'
         except:
             space_image = '/static/images/Space.jpeg'
-        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'description': request.json['space_description'][:200], 'admins': [request.json['request_owner_id']], 'members': [request.json['request_owner_id'], user['name']]], 'banned': [], 'theme': 'default', 'invite_only': False})
+        collection_spaces.insert_one({'_id': space_id, 'name': request.json['space_name'][:200], 'picture': space_image, 'description': request.json['space_description'][:200], 'admins': [request.json['request_owner_id']], 'members': [request.json['request_owner_id'], user['name']], 'banned': [], 'theme': 'default', 'invite_only': False})
         collection_rooms.insert_many([room, special_rooms])
         collection_sections.insert_one(section)        
         joined = user['joined']
