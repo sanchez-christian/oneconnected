@@ -574,7 +574,7 @@
         url: '/display_policies',
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          if(data['agree'] = false){
+          if(data['agree'] = 'false'){
             document.getElementById("confirm-accept-policies").style.display = "block";
           }
           else {
