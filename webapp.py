@@ -709,8 +709,8 @@ def confirm_approve_space():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
-        space_data = collection_spaceRequests.find_one({'_id': request.json['request_id']})
-        collection_spaceRequests.delete_one({'_id': request.json['request_id']})
+        space_data = collection_spaceRequests.find_one({'_id': ObjectId(request.json['request_id'])})
+        collection_spaceRequests.delete_one({'_id': ObjectId(request.json['request_id'])})
         return Response(dumps(space_data), mimetype='application/json')
     session['logged'] = False
     session.clear()
