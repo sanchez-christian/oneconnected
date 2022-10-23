@@ -362,7 +362,7 @@
       </div>
     </div>
     <!--New Modals Here-->
-    <div id="confirm-accept-policies" class="modal"> 
+    <div id="confirm-accept-policies" class="modal"> <!--modal for policies-->
       <div class="modal-content">
         <span id="close-confirm-accept-policies" class="close">&times;</span>
         <p class="modal-header">You will be logged out and must log back in once you answer the following question. Do you agree to our <a href="https://privacypolicy.oneconnected.repl.co">privacy policy</a> and <a href="https://cookiepolicy.oneconnected.repl.co">cookie policy</a>?</p>
@@ -936,7 +936,7 @@
               newNodeChild = document.createElement('td');
               newNodeChild.innerHTML = formNode;
               newNode.appendChild(newNodeChild);
-              newNode.setAttribute('id', ObjectID(item['_id']));
+              newNode.setAttribute('data-id', item['_id']);
               newFragment.appendChild(newNode);
               //newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
             });
@@ -1076,6 +1076,10 @@
         }
       });
 
+      $('#').on('hidden', function () {//modal for policies
+    // do something…
+});
+      
       $('#directory-search-bar').keydown(function (e) {
         if (e.keyCode == 13) {
           e.preventDefault();
