@@ -1888,7 +1888,7 @@
       
       let approveSpaceModal = document.getElementById("confirm-approve-space")
       $(document).on('click', '.approve-space', function () {
-        approveSpaceModal.setAttribute('data-id', this.parentElement.parentElement.id)
+        approveSpaceModal.childElement.setAttribute('data-id', this.parentElement.parentElement.id)
         approveSpaceModal.style.display = "block";
         $(".approve-space").prop("checked", false);
       });
@@ -1901,7 +1901,7 @@
           type:'POST',
           url: '/confirm_approve_space',
           dataType: "json",
-          data: JSON.stringify({'request_id': this.parentElement.parentElement.attr('data-id')}),
+          data: JSON.stringify({'request_id': this.parentElement.id}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             let space_name = data['space_name'].trim();
