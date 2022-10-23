@@ -574,13 +574,14 @@
         url: '/display_policies',
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          if(data = 'false') {
+          /*if(data = 'false') {
             document.getElementById('confirm-accept-policies').style.display = "block"
           }
           else if(data = 'true') {
             document.getElementById('confirm-accept-policies').style.display = "none"
-          }
+          }*/
           document.getElementById('confirm-accept-policies').innerHTML('<div class="modal-content"><span id="close-confirm-approve-space" class="close">&times;</span><p class="modal-header">' + data + '</p><div class="confirm-button" id="confirm-approve-space-button">Confirm</div></div>')
+          document.getElementById('confirm-accept-policies').style.display = "block"
         }
       });
 
