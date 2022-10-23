@@ -173,7 +173,7 @@ def callback():
         return redirect(url_for('render_login', error = "Email not available or verified"))
     
     if not collection_users.count_documents({ '_id': unique_id}, limit = 1):
-        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user', 'owns': 0, 'agreed-terms': 'false'}) #check if profile picture the same !
+        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user', 'owns': 0, 'agreed': 'false'}) #check if profile picture the same !
     else:
         user_status = collection_users.find_one({ '_id': unique_id})['status']
         if user_status == 'banned':
@@ -251,7 +251,7 @@ def accept_policies():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
-        collection_users.update_one({'_id': session['unique_id']}, {'$set': {'agreed-terms', 'true'}}) #used for modal policies
+        collection_users.update_one({'_id': session['unique_id']}, {'$set': {'agreed', 'true'}}) #used for modal policies
         return Response(dumps({'success':'true'}), mimetype='application/json')
     session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
     session.clear()
