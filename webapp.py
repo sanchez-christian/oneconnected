@@ -192,6 +192,7 @@ def callback():
     session['logged'] = True
     session['current_space'] = ''
     session['current_space_name'] = ''
+    #maybe add session['spaces'] = ''
     
     return redirect(url_for('render_main_page'))
 
@@ -251,7 +252,7 @@ def logout():
 def list_spaces():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST':
+    if request.method == 'POST' and 'logged' in session['logged'] or session['logged'] == True:
         user_spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
         space_list = []
         for space_item in user_spaces:
@@ -661,6 +662,7 @@ def report_message():
     return 'not allowed', 405
 
 #When a user submits a space creation request, add the request to the database.
+#If user is deleted from database, space request remains. Fix later maybe.
 
 @app.route('/approve_space', methods=['GET', 'POST'])
 def approve_space():
