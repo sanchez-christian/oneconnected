@@ -568,7 +568,7 @@
       });
 
       document.getElementById("confirm-accept-policies").style.display = "block";
-      document.getElementbyID('confirm-accept-policies-button').on('click', function() {
+      document.getElementbyId('confirm-accept-policies-button').on('click', function() {
         $.ajax({
           type:'POST',
           url: '/accept_policies',
@@ -577,8 +577,8 @@
           }
         });
       });
-      
-      $('#confirm-accept-policies').on('hidden', function () {
+
+      document.getElementbyId('#confirm-accept-policies').on('hidden', function () {
         $.ajax({
           type:'POST',
           url: '/logout',
@@ -1841,10 +1841,8 @@
       });
 
       let approveSpaceModal = document.getElementById("confirm-approve-space")
-      document.getElementbyID('.approve-space').change(function () {
-        if(this.checked) {
-          approveSpaceModal.style.display = "block";
-        }
+      document.getElementbyId('.approve-space').checked(function () {
+        approveSpaceModal.style.display = "block";
       });
       
       document.getElementById('create-space-form').onsubmit = function (e) {
