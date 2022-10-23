@@ -1901,7 +1901,7 @@
           type:'POST',
           url: '/confirm_approve_space',
           dataType: "json",
-          data: JSON.stringify({'request_id': this.parentElement.parentElement.id}),
+          data: JSON.stringify({'request_id': this.parentElement.parentElement.attr('data-id')}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
             let space_name = data['space_name'].trim();
