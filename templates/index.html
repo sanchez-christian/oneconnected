@@ -366,7 +366,7 @@
       <div class="modal-content">
         <span id="close-confirm-accept-policies" class="close">&times;</span>
         <p class="modal-header">You will be logged out and must log back in once you answer the following question. Do you agree to our <a href="https://privacypolicy.oneconnected.repl.co">privacy policy</a> and <a href="https://cookiepolicy.oneconnected.repl.co">cookie policy</a>?</p>
-        <div class="confirm-button" id="confirm-accept-policies">Yes</div>
+        <div class="confirm-button" id="confirm-accept-policies-button">Yes</div>
       </div>
     </div>
     <div id="confirm-delete-space" class="modal">  <!--Backend check for character limit and other security-->
@@ -566,6 +566,28 @@
           });
         }
       });
+
+      document.getElementById("confirm-accept-policies").style.display = "block";
+      document.getElementbyID('confirm-accept-policies-button').click(function() {
+        $.ajax({
+          type:'POST',
+          url: '/accept_policies',
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+          }
+        });
+      });
+
+      $('#confirm-accept-policies').on('hidden', function () {
+        $.ajax({
+          type:'POST',
+          url: '/logout',
+          contentType: 'application/json;charset=UTF-8',
+          success: function(data) {
+          }
+        });
+      })
+      
 
       $.ajax({
         type: 'POST',
@@ -1075,10 +1097,6 @@
           member?.querySelector('.status-icon')?.remove();
         }
       });
-
-      $('#confirm-accept-policies').on('hidden', function () {//modal for policies
-    // do something…
-});
       
       $('#directory-search-bar').keydown(function (e) {
         if (e.keyCode == 13) {
@@ -1823,9 +1841,11 @@
       });
 
       let approveSpaceModal = document.getElementById("confirm-approve-space")
-      document.getElementbyID('.approve-space').checked = function (e) {
-        approveSpaceModal.style.display = "block";
-      }
+      document.getElementbyID('.approve-space').change(function () {
+        if(this.checked) {
+          approveSpaceModal.style.display = "block";
+        }
+      });
       
       document.getElementById('create-space-form').onsubmit = function (e) {
         alert("Your request to make a space has been received. After being reviewed by school officials, your request will be approved and your space will be displayed on the Club Directory.")
@@ -2066,7 +2086,6 @@
       
       $(document).on('click', '#confirm-delete-message-button', function() {//modal for policies
         //const
-        $.ajax
       });
       
       $(document).on('click', '#close-confirm-delete-space', function() {
