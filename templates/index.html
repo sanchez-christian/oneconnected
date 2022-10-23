@@ -365,7 +365,7 @@
     <div id="confirm-accept-policies" class="modal"> <!--modal for policies-->
       <div class="modal-content">
         <span id="close-confirm-accept-policies" class="close">&times;</span>
-        <p class="modal-header">You will be logged out and must log back in once you answer the following question. Do you agree to our <a href="https://privacypolicy.oneconnected.repl.co">privacy policy</a> and <a href="https://cookiepolicy.oneconnected.repl.co">cookie policy</a>?</p>
+        <p class="modal-header">You will be logged out and must log back in once you answer the following question: Do you agree to our <a href="https://privacypolicy.oneconnected.repl.co">privacy policy</a> and <a href="https://cookiepolicy.oneconnected.repl.co">cookie policy</a>?</p>
         <div class="confirm-button" id="confirm-accept-policies-button">Yes</div>
       </div>
     </div>
@@ -568,7 +568,7 @@
       });
 
       document.getElementById("confirm-accept-policies").style.display = "block";
-      document.getElementbyID('confirm-accept-policies-button').click(function() {
+      document.getElementbyID('confirm-accept-policies-button').on('click', function() {
         $.ajax({
           type:'POST',
           url: '/accept_policies',
@@ -577,7 +577,7 @@
           }
         });
       });
-
+      
       $('#confirm-accept-policies').on('hidden', function () {
         $.ajax({
           type:'POST',
