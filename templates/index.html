@@ -955,7 +955,7 @@
             const newFragment = document.createDocumentFragment();
             data.forEach(function (item) {
               let formNode = '';
-              formNode = '<form class="approve-space"><div class="approve-space-button">Approve</div></form>';
+              formNode = '<form class="approve-space"><div class="confirm-button">Approve</div></form>';
               let newNode = document.createElement('tr');
               newNode.className = 'admin-pending-table-row';
               //newNode.setAttribute('data-id', item._id);
@@ -1915,7 +1915,7 @@
                 type: 'POST',
                 url: '/create_space',
                 dataType: "json",
-                data: JSON.stringify({'request_id': this.parentElement.parentElement.getAttribute('data-id'), 'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
+                data: JSON.stringify({'request_id': data[2], 'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
                 contentType: 'application/json;charset=UTF-8',
                 success: function(data) {
                   if ('success' in data) {
