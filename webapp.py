@@ -173,7 +173,7 @@ def callback():
         return redirect(url_for('render_login', error = "Email not available or verified"))
     
     if not collection_users.count_documents({ '_id': unique_id}, limit = 1):
-        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user', 'owns': 0}) #check if profile picture the same !
+        collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user', 'owns': 0, 'agreed': 'false'}) #check if profile picture the same !
     else:
         user_status = collection_users.find_one({ '_id': unique_id})['status']
         if user_status == 'banned':
