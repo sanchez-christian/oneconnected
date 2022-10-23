@@ -955,7 +955,7 @@
             const newFragment = document.createDocumentFragment();
             data.forEach(function (item) {
               let formNode = '';
-              formNode = '<form class="approve-space"><input type="checkbox"></form>';
+              formNode = '<form class="approve-space"><input type="button">Approve</button></form>';
               let newNode = document.createElement('tr');
               newNode.className = 'admin-pending-table-row';
               //newNode.setAttribute('data-id', item._id);
@@ -1890,7 +1890,6 @@
       $(document).on('click', '.approve-space', function () {
         approveSpaceModal.setAttribute('data-id', this.parentElement.parentElement.getAttribute('data-id'))
         approveSpaceModal.style.display = "block";
-        $(".approve-space").prop("checked", false);
       });
 
       $(document).on('click', '#confirm-approve-space-button', function (e) {
