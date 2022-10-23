@@ -580,6 +580,7 @@
           else if(data = 'true') {
             document.getElementById('confirm-accept-policies').style.display = "none"
           }
+          document.getElementById('confirm-accept-policies').innerHTML('<div class="modal-content"><span id="close-confirm-approve-space" class="close">&times;</span><p class="modal-header">' + data + '</p><div class="confirm-button" id="confirm-approve-space-button">Confirm</div></div>')
         }
       });
 
