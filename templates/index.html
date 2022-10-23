@@ -1895,6 +1895,7 @@
 
       $(document).on('click', '#confirm-approve-space-button', function (e) {
         e.preventDefault();
+        alert("Space has been approved!")
         $.ajax({
           type:'POST',
           url: '/confirm_approve_space',
