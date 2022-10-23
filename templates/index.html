@@ -986,7 +986,7 @@
               newNodeChild = document.createElement('td');
               newNodeChild.innerHTML = formNode;
               newNode.appendChild(newNodeChild);
-              newNode.setAttribute('data-id', item['_id']['$oid']);
+              newNode.setAttribute('id', item['_id']['$oid']);
               newFragment.appendChild(newNode);
               //newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
             });
@@ -1888,7 +1888,7 @@
       
       let approveSpaceModal = document.getElementById("confirm-approve-space")
       $(document).on('click', '.approve-space', function () {
-        approveSpaceModal.setAttribute('data-id', this.parentElement.parentElement.attr("data-id"))
+        approveSpaceModal.setAttribute('data-id', this.parentElement.parentElement.id)
         approveSpaceModal.style.display = "block";
         $(".approve-space").prop("checked", false);
       });
