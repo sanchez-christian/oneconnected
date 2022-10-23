@@ -567,8 +567,12 @@
         }
       });
 
+      let acceptPoliciesModal = document.getElementById("confirm-accept-policies");
       document.getElementById("confirm-accept-policies").style.display = "block";
-      document.getElementbyId('confirm-accept-policies-button').on('click', function() {
+      $(document).on('click', '#close-confirm-accept-policies', function() {
+        acceptPoliciesModal.style.display = "none";
+      });
+      $(document).on('click', '#confirm-accept-policies-button', function() {
         $.ajax({
           type:'POST',
           url: '/accept_policies',
@@ -580,6 +584,7 @@
                 url: '/logout',
                 contentType: 'application/json;charset=UTF-8',
                 success: function(data) {
+                  acceptPoliciesModal.style.display = "none"
                 }
               });
             }
@@ -593,6 +598,7 @@
           url: '/logout',
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
+            acceptPoliciesModal.style.display = "none"
           }
         });
       })
