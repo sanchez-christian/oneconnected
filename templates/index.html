@@ -936,7 +936,7 @@
               newNodeChild = document.createElement('td');
               newNodeChild.innerHTML = formNode;
               newNode.appendChild(newNodeChild);
-              newNode.setAttribute('data-id', item['_id']);
+              newNode.setAttribute('data-id', item['_id']['$oid']);
               newFragment.appendChild(newNode);
               //newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
             });
@@ -1076,7 +1076,7 @@
         }
       });
 
-      $('#').on('hidden', function () {//modal for policies
+      $('#confirm-accept-policies').on('hidden', function () {//modal for policies
     // do something…
 });
       
