@@ -568,6 +568,7 @@
       });
 
       let acceptPoliciesModal = document.getElementById("confirm-accept-policies");
+      document.getElementById('confirm-accept-policies').style.display = "block"
 
       $(document).on('click', '#close-confirm-accept-policies', function() {
         $.ajax({
@@ -603,13 +604,16 @@
         url: '/display_policies',
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          if(data['agreed'] = 'true') {
+          if(data = 'true') {
             document.getElementById('confirm-accept-policies').style.display = "none"
+          }
+          else {
+            document.getElementById('confirm-accept-policies').style.display = "block"
           }
         }
       });
 
-      document.getElementById('confirm-accept-policies').style.display = "block"
+      
 
       $.ajax({
         type: 'POST',
