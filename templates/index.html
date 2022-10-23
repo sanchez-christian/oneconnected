@@ -1915,7 +1915,7 @@
                 type: 'POST',
                 url: '/create_space',
                 dataType: "json",
-                data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
+                data: JSON.stringify({'request_id': this.parentElement.parentElement.getAttribute('data-id'), 'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
                 contentType: 'application/json;charset=UTF-8',
                 success: function(data) {
                   if ('success' in data) {
