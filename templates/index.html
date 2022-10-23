@@ -578,27 +578,25 @@
           url: '/accept_policies',
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            if('success' == 'true') {
-              $.ajax({
-                type:'POST',
-                url: '/logout',
-                contentType: 'application/json;charset=UTF-8',
-                success: function(data) {
-                  acceptPoliciesModal.style.display = "none"
-                }
-              });
-            }
+            $.ajax({
+              type: 'POST',
+              url: '/logout',
+              dataType: "json",
+              success: function(data) {
+                window.location.href = "https://www.oneconnected.app";
+              }
+            });
           }
         });
       });
 
       document.getElementbyId('#confirm-accept-policies').on('hidden', function () {
         $.ajax({
-          type:'POST',
+          type: 'POST',
           url: '/logout',
-          contentType: 'application/json;charset=UTF-8',
+          dataType: "json",
           success: function(data) {
-            acceptPoliciesModal.style.display = "none"
+            window.location.href = "https://www.oneconnected.app";
           }
         });
       })
