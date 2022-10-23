@@ -264,6 +264,7 @@ def display_policies():
     if request.method == 'POST':
         profile = collection_users.find_one({'_id': session['unique_id']})
         data = profile['agreed']
+        print(data)
         return Response(dumps(data), mimetype='application/json')
     session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
     session.clear()
