@@ -567,19 +567,15 @@
         }
       });
 
-      /*
-      accept policies modal
       let acceptPoliciesModal = document.getElementById("confirm-accept-policies");
-
+      document.getElementById('confirm-accept-policies').style.display = "block"
+      
       $.ajax({
         type:'POST',
         url: '/display_policies',
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          if(data = 'false') {
-            document.getElementById('confirm-accept-policies').style.display = "block"
-          }
-          else if(data = 'true') {
+          if('success' in data) {
             document.getElementById('confirm-accept-policies').style.display = "none"
           }
         }
@@ -614,7 +610,7 @@
             });
           }
         });
-      });*/
+      });
       
 
       $.ajax({
