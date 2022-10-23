@@ -1855,7 +1855,13 @@
 
       let approveSpaceModal = document.getElementById("confirm-approve-space")
       $(document).on('checked', '.approve-space', function () {
+        //approveSpaceModal.setAttribute('data-id', this.parentElement.id)
         approveSpaceModal.style.display = "block";
+        //$(".approve-space").prop("checked", false);
+      });
+
+      $(document).on('click', '#confirm-approve-space-button', function () {
+        
       });
       
       document.getElementById('create-space-form').onsubmit = function (e) {
