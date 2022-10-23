@@ -1903,8 +1903,11 @@
           dataType: "json",
           data: JSON.stringify({'request_id': this.parentElement.parentElement.id}),
           contentType: 'application/json;charset=UTF-8',
-          success: function(space_data) {
-            if (space_name.length) { 
+          success: function(data) {
+            let space_name = data['space_name'].trim();
+            let space_image = data['space_image'].trim();
+            let space_description = data['space_description'].trim();
+            if (space_name.length) {    
               $.ajax({
                 type: 'POST',
                 url: '/create_space',
@@ -1912,33 +1915,31 @@
                 data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
                 contentType: 'application/json;charset=UTF-8',
                 success: function(data) {
-                  let space_name = space_data['space_name'].trim();
-                  let space_image = space_data['space_image'].trim();
-                  let space_description = space_data['space_description'].trim();
-                  if ('success' in data) {
-                    alert('You may only create up to 3 spaces.');
-                  }
-                  else {
-                    document.getElementById("create-space").style.display = "none";
-                    $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-                    $(document.getElementById(current_space)).attr('style', '');
-                    let newNode = document.createElement('li');
-                    newNode.className = 'space-wrapper';
-                    let newNodeChild = document.createElement('img');
-                    newNodeChild.className = 'space pointer';
-                    newNodeChild.id = data.space_id;
-                    newNodeChild.setAttribute('data-name', space_name);
-                    newNodeChild.style.borderRadius = '3px';
-                    newNodeChild.src = data.space_image;
-                    newNode.appendChild(newNodeChild);
-                    newNodeChild = document.createElement('div');
-                    newNodeChild.className = 'active-space';
-                    newNodeChild.style.width = '39px'
-                    newNode.appendChild(newNodeChild);
-                    referenceNode = document.getElementById('space_align_helper');
-                    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-                    current_space = data.space_id;
-                    space();
+                    if ('success' in data) {
+                      alert('You may only create up to 3 spaces.');
+                    }
+                    else {
+                      document.getElementById("create-space").style.display = "none";
+                      $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+                      $(document.getElementById(current_space)).attr('style', '');
+                      let newNode = document.createElement('li');
+                      newNode.className = 'space-wrapper';
+                      let newNodeChild = document.createElement('img');
+                      newNodeChild.className = 'space pointer';
+                      newNodeChild.id = data.space_id;
+                      newNodeChild.setAttribute('data-name', space_name);
+                      newNodeChild.style.borderRadius = '3px';
+                      newNodeChild.src = data.space_image;
+                      newNode.appendChild(newNodeChild);
+                      newNodeChild = document.createElement('div');
+                      newNodeChild.className = 'active-space';
+                      newNodeChild.style.width = '39px'
+                      newNode.appendChild(newNodeChild);
+                      referenceNode = document.getElementById('space_align_helper');
+                      referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+                      current_space = data.space_id;
+                      space();
+                    }
                   }
                 }
               });
