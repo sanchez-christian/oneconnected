@@ -382,7 +382,7 @@
     <div id="confirm-approve-space" class="modal"> 
       <div class="modal-content">
         <span id="close-confirm-approve-space" class="close">&times;</span>
-        <p class="modal-header">Are you sure you want to delete this message?</p>
+        <p class="modal-header">Are you sure you want to approve this space?</p>
         <div class="confirm-button" id="confirm-approve-space-button">Confirm</div>
       </div>
     </div>
@@ -955,7 +955,7 @@
             const newFragment = document.createDocumentFragment();
             data.forEach(function (item) {
               let formNode = '';
-              formNode = '<form class="approve-space"><input type="button">Approve</button></form>';
+              formNode = '<form class="approve-space"><div class="confirm-button" id="approve-space-button">Approve</div></form>';
               let newNode = document.createElement('tr');
               newNode.className = 'admin-pending-table-row';
               //newNode.setAttribute('data-id', item._id);
@@ -1890,6 +1890,10 @@
       $(document).on('click', '.approve-space', function () {
         approveSpaceModal.setAttribute('data-id', this.parentElement.parentElement.getAttribute('data-id'))
         approveSpaceModal.style.display = "block";
+      });
+
+      $(document).on('click', '#close-approve-space', function () {
+        approveSpaceModal.style.display = "none";
       });
 
       $(document).on('click', '#confirm-approve-space-button', function (e) {
