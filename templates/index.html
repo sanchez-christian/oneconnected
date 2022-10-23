@@ -577,7 +577,7 @@
           if(data['agreed'] = 'false'){
             document.getElementById("confirm-accept-policies").style.display = "block";
           }
-          else {
+          if(data['agreed'] = 'true'){
             document.getElementById("confirm-accept-policies").style.display = "none";
           }
         }
