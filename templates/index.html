@@ -1904,9 +1904,6 @@
           data: JSON.stringify({'request_id': this.parentElement.parentElement.id}),
           contentType: 'application/json;charset=UTF-8',
           success: function(space_data) {
-            let space_name = space_data['space_name'].trim();
-            let space_image = space_data['space_image'].trim();
-            let space_description = space_data['space_description'].trim();
             if (space_name.length) { 
               $.ajax({
                 type: 'POST',
@@ -1915,6 +1912,9 @@
                 data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
                 contentType: 'application/json;charset=UTF-8',
                 success: function(data) {
+                  let space_name = space_data['space_name'].trim();
+                  let space_image = space_data['space_image'].trim();
+                  let space_description = space_data['space_description'].trim();
                   if ('success' in data) {
                     alert('You may only create up to 3 spaces.');
                   }
