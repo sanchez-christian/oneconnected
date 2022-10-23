@@ -574,11 +574,11 @@
         url: '/display_policies',
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          if(data['agreed'] = 'false') {
-            document.getElementById("confirm-accept-policies").style.display = "block";
-          }
           if(data['agreed'] = 'true') {
             document.getElementById("confirm-accept-policies").style.display = "none";
+          }
+          else {
+            document.getElementById("confirm-accept-policies").style.display = "block";
           }
         }
       });
