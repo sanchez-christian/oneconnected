@@ -986,7 +986,7 @@
               newNodeChild = document.createElement('td');
               newNodeChild.innerHTML = formNode;
               newNode.appendChild(newNodeChild);
-              newNode.setAttribute('id', item['_id']['$oid']);
+              newNode.setAttribute('data-id', item['_id']['$oid']);
               newFragment.appendChild(newNode);
               //newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
             });
