@@ -556,8 +556,7 @@ def delete_section():
 def create_space():
     if session_expired() or banned():
         return 'expired', 200
-    request = collection_users.find_one({"_id": ObjectId(request.json['request_id'])})
-    user = request['user_id']
+    user = collection_users.find_one({'_id': ObjectId(request.json['request_owner_id'])})
     if request.method == 'POST' and user['owns'] < 3:
         space_id = ObjectId()
         room_id = ObjectId()
@@ -710,10 +709,9 @@ def confirm_approve_space():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
-        request_id = request.json['request_id']
         space_data = collection_spaceRequests.find_one({'_id': ObjectId(request.json['request_id'])})
         collection_spaceRequests.delete_one({'_id': ObjectId(request.json['request_id'])})
-        return Response(dumps(space_data, request_id), mimetype='application/json')
+        return Response(dumps(space_data), mimetype='application/json')
     session['logged'] = False
     session.clear()
     return 'not allowed', 405
