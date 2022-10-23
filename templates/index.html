@@ -1919,7 +1919,7 @@
                 contentType: 'application/json;charset=UTF-8',
                 success: function(data) {
                   if ('success' in data) {
-                    alert('You may only create up to 3 spaces.');
+                    alert('that user had');
                   }
                   else {
                     document.getElementById("create-space").style.display = "none";
@@ -1941,7 +1941,6 @@
                     referenceNode = document.getElementById('space_align_helper');
                     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
                     current_space = data.space_id;
-                    space();
                   }
                 }
               });
