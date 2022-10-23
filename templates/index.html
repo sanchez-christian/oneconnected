@@ -1898,8 +1898,6 @@
 
       $(document).on('click', '#confirm-approve-space-button', function (e) {
         e.preventDefault();
-        approveSpaceModal.style.display = "none";
-        alert("Space has been approved!")
         $.ajax({
           type:'POST',
           url: '/confirm_approve_space',
@@ -1918,6 +1916,8 @@
                 data: JSON.stringify({'request_owner_id': data['user_id'],'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
                 contentType: 'application/json;charset=UTF-8',
                 success: function(data) {
+                  approveSpaceModal.style.display = "none";
+                  alert("Space has been approved!")
                   /*else {
                     document.getElementById("create-space").style.display = "none";
                     $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
