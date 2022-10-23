@@ -251,7 +251,7 @@ def accept_policies():
     if session_expired() or banned():
         return 'expired', 200
     if request.method == 'POST':
-        collection_users.update_one({'_id': session['unique_id']}, {'$set': {'agreed', 'true'}}) #used for modal policies
+        collection_users.update_one({'_id': session['unique_id']}, {'$set': {'agreed': 'true'}}) #used for modal policies
         return Response(dumps({'success':'true'}), mimetype='application/json')
     session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
     session.clear()
