@@ -362,6 +362,13 @@
       </div>
     </div>
     <!--New Modals Here-->
+    <div id="confirm-delete-message" class="modal"> 
+      <div class="modal-content">
+        <span id="close-confirm-accept-policies" class="close">&times;</span>
+        <p class="modal-header">Are you sure you want to delete this message?</p>
+        <div class="confirm-button" id="confirm-delete-message-button">Confirm</div>
+      </div>
+    </div>
     <div id="confirm-delete-space" class="modal">  <!--Backend check for character limit and other security-->
       <div class="modal-content">
         <span id="close-confirm-delete-space" class="close">&times;</span>
@@ -892,7 +899,6 @@
             data.forEach(function (item) {
               let formNode = '';
               formNode = '<form class="approve-space"><input type="checkbox"></form>';
-              formNode.setAttribute('id', item['_id'].toString())
               let newNode = document.createElement('tr');
               newNode.className = 'admin-pending-table-row';
               //newNode.setAttribute('data-id', item._id);
@@ -923,6 +929,7 @@
               newNodeChild = document.createElement('td');
               newNodeChild.innerHTML = formNode;
               newNode.appendChild(newNodeChild);
+              newNode.setAttribute('id', item['_id'].toString);
               newFragment.appendChild(newNode);
               //newNode.innerHTML = '<td><img class="profile-picture" src="' + item.picture + '"> ' + item.name + '</td><td>' + item.email + '</td><td>' + formNode + '</td>';
             });
