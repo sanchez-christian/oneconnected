@@ -569,17 +569,17 @@
 
       let acceptPoliciesModal = document.getElementById("confirm-accept-policies");
       
-      document.getElementById('confirm-accept-policies').style.display = "none"
-      
-      $.ajax({
-        type:'POST',
-        url: '/display_policies',
-        contentType: 'application/json;charset=UTF-8',
-        success: function(data) {
-          if(data['agreed'] = 'false') {
-            document.getElementById('confirm-accept-policies').style.display = "block"
+      document.getElementById('confirm-accept-policies').style.display = "block"
+
+      $(document).on('click', '#close-confirm-accept-policies', function() {
+        $.ajax({
+          type: 'POST',
+          url: '/logout',
+          dataType: "json",
+          success: function(data) {
+            window.location.href = "https://www.oneconnected.app";
           }
-        }
+        });
       });
 
       $(document).on('click', '#confirm-accept-policies-button', function() {
@@ -600,15 +600,15 @@
         });
       });
 
-      $(document).on('click', '#close-confirm-accept-policies', function() {
-        $.ajax({
-          type: 'POST',
-          url: '/logout',
-          dataType: "json",
-          success: function(data) {
-            window.location.href = "https://www.oneconnected.app";
+      $.ajax({
+        type:'POST',
+        url: '/display_policies',
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data) {
+          if(data['agreed'] = 'true') {
+            document.getElementById('confirm-accept-policies').style.display = "none"
           }
-        });
+        }
       });
 
       $.ajax({
