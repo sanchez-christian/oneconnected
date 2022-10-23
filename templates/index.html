@@ -622,6 +622,10 @@
         url: '/list_spaces',
         dataType: "json",
         success: function(data) {
+          if (data[2] == 'True') {
+            admin = true;
+            document.getElementById('server-settings-button').style.display = 'inline-block';
+          }
           data[1].forEach(function(item) { 
             try {
               let newNode = document.createElement('li'); 
@@ -640,10 +644,6 @@
             }
             catch(e) {
             }
-          if (data[2] == 'True') {
-            admin = true;
-            document.getElementById('server-settings-button').style.display = 'inline-block';
-          }
           });
           data[0].forEach(function(item) {
             newNode = document.createElement('div');
