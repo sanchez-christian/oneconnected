@@ -1795,7 +1795,6 @@
           });
         }
       }
-
       $(document).on('contextmenu', '.section', function (e) {
         hideSecondLayer();
         if (space_admin || admin) {
@@ -1823,6 +1822,11 @@
         }
       });
 
+      let approveSpaceModal = document.getElementById("confirm-approve-space")
+      document.getElementbyID('.approve-space').checked = function (e) {
+        approveSpaceModal.style.display = "block";
+      }
+      
       document.getElementById('create-space-form').onsubmit = function (e) {
         alert("Your request to make a space has been received. After being reviewed by school officials, your request will be approved and your space will be displayed on the Club Directory.")
         let space_name = document.getElementById('space-name').value.trim();
@@ -2059,6 +2063,11 @@
           });
         }
       }
+      
+      $(document).on('click', '#confirm-delete-message-button', function() {//modal for policies
+        //const
+        $.ajax
+      });
       
       $(document).on('click', '#close-confirm-delete-space', function() {
         deleteSpaceModal.style.display = "none";
