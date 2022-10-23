@@ -590,7 +590,7 @@
         });
       });
 
-      document.getElementbyId('#confirm-accept-policies').on('hidden', function () {
+      $(document).on('hidden', '#confirm-accept-policies-button', function() {
         $.ajax({
           type: 'POST',
           url: '/logout',
@@ -599,7 +599,7 @@
             window.location.href = "https://www.oneconnected.app";
           }
         });
-      })
+      });
       
 
       $.ajax({
