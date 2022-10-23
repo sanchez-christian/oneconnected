@@ -256,6 +256,18 @@ def accept_policies():
     session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
     session.clear()
     return 'not allowed', 405
+
+@app.route('/display_policies', methods=['GET', 'POST'])
+def display_policies():
+    if session_expired() or banned():
+        return 'expired', 200
+    if request.method == 'POST':
+        data = collection_users.find_one({'_id': session['unique_id']})
+        return Response(dumps(data), mimetype='application/json')
+    session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
+    session.clear()
+    return 'not allowed', 405
+
         
 # Returns all space data from MongoDB.
 
