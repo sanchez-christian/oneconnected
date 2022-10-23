@@ -252,7 +252,7 @@ def logout():
 def list_spaces():
     if session_expired() or banned():
         return 'expired', 200
-    if request.method == 'POST' and 'logged' in session['logged'] or session['logged'] == True:
+    if request.method == 'POST':
         user_spaces = collection_users.find_one({"_id": session['unique_id']})['joined']
         space_list = []
         for space_item in user_spaces:
