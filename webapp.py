@@ -246,28 +246,28 @@ def logout():
         session.clear()
         return Response(dumps({'success': 'true'}), mimetype='application/json')
 
-@app.route('/accept_policies', methods=['GET', 'POST'])
-def accept_policies():
-    if session_expired() or banned():
-        return 'expired', 200
-    if request.method == 'POST':
-        collection_users.update_one({'_id': session['unique_id']}, {'$set': {'agreed': 'true'}}) #used for modal policies
-        return Response(dumps({'success':'true'}), mimetype='application/json')
-    session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
-    session.clear()
-    return 'not allowed', 405
+# @app.route('/accept_policies', methods=['GET', 'POST'])
+# def accept_policies():
+#     if session_expired() or banned():
+#         return 'expired', 200
+#     if request.method == 'POST':
+#         collection_users.update_one({'_id': session['unique_id']}, {'$set': {'agreed': 'true'}}) #used for modal policies
+#         return Response(dumps({'success':'true'}), mimetype='application/json')
+#     session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
+#     session.clear()
+#     return 'not allowed', 405
 
-@app.route('/display_policies', methods=['GET', 'POST'])
-def display_policies():
-    if session_expired() or banned():
-        return 'expired', 200
-    if request.method == 'POST':
-        profile = collection_users.find_one({'_id': session['unique_id']})
-        data = profile['agreed']
-        return Response(dumps(data), mimetype='application/json')
-    session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
-    session.clear()
-    return 'not allowed', 405
+# @app.route('/display_policies', methods=['GET', 'POST'])
+# def display_policies():
+#     if session_expired() or banned():
+#         return 'expired', 200
+#     if request.method == 'POST':
+#         profile = collection_users.find_one({'_id': session['unique_id']})
+#         data = profile['agreed']
+#         return Response(dumps(data), mimetype='application/json')
+#     session['logged'] = False # Prevents browsers from using cached session data to log in. NOTE: We use server-side sessions now
+#     session.clear()
+#     return 'not allowed', 405
 
         
 # Returns all space data from MongoDB.
@@ -700,6 +700,17 @@ def approve_space():
             request.json['space_image'] = '/static/images/Space.jpeg'
         collection_spaceRequests.insert_one({'by': session['users_name'], 'picture': session['picture'], 'user_id': session['unique_id'], 'email': session['users_email'], 'space_name': request.json['space_name'], 'space_image': request.json['space_image'], 'space_description': request.json['space_description']})
         return Response(dumps({'success': 'true'}), mimetype='application/json')
+    session['logged'] = False
+    session.clear()
+    return 'not allowed', 405
+
+@app.route('/confirm_approve_space', methods=['GET', 'POST'])
+def confirm_approve_space():
+    if session_expired() or banned():
+        return 'expired', 200
+    if request.method == 'POST':
+        space_data = collection_spaceRequests.find_one({'_id': request.json['request_id']})
+        return Response(dumps(space_data), mimetype='application/json')
     session['logged'] = False
     session.clear()
     return 'not allowed', 405

@@ -567,6 +567,8 @@
         }
       });
 
+      /*
+      accept policies modal
       let acceptPoliciesModal = document.getElementById("confirm-accept-policies");
 
       $.ajax({
@@ -574,15 +576,15 @@
         url: '/display_policies',
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
-          /*if(data = 'false') {
+          if(data = 'false') {
             document.getElementById('confirm-accept-policies').style.display = "block"
           }
           else if(data = 'true') {
             document.getElementById('confirm-accept-policies').style.display = "none"
-          }*/
-          document.getElementById('confirm-accept-policies').innerHTML('<div class="modal-content"><span id="close-confirm-approve-space" class="close">&times;</span><p class="modal-header">' + data + '</p><div class="confirm-button" id="confirm-approve-space-button">Confirm</div></div>')
+          }
         }
       });
+      
       document.getElementById('confirm-accept-policies').style.display = "block"
 
       $(document).on('click', '#close-confirm-accept-policies', function() {
@@ -612,7 +614,7 @@
             });
           }
         });
-      });
+      });*/
       
 
       $.ajax({
@@ -1866,16 +1868,7 @@
         }
       });
 
-      let approveSpaceModal = document.getElementById("confirm-approve-space")
-      $(document).on('checked', '.approve-space', function () {
-        //approveSpaceModal.setAttribute('data-id', this.parentElement.id)
-        approveSpaceModal.style.display = "block";
-        //$(".approve-space").prop("checked", false);
-      });
-
-      $(document).on('click', '#confirm-approve-space-button', function () {
-        
-      });
+      
       
       document.getElementById('create-space-form').onsubmit = function (e) {
         alert("Your request to make a space has been received. After being reviewed by school officials, your request will be approved and your space will be displayed on the Club Directory.")
@@ -1889,55 +1882,69 @@
           data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            if (data['success'] == 'true'){
-              alert("success")
-            }
           }
         })
       }
-        /*Used for the creation of spaces (once approved by school official). gonna be used for space verification
+      
+      let approveSpaceModal = document.getElementById("confirm-approve-space")
+      $(document).on('checked', '.approve-space', function () {
+        approveSpaceModal.setAttribute('data-id', this.parentElement.parentElement.attr("data-id"))
+        approveSpaceModal.style.display = "block";
+        $(".approve-space").prop("checked", false);
+      });
+
+      $(document).on('click', '#confirm-approve-space-button', function (e) {
         e.preventDefault();
-        let space_name = document.getElementById('space-name').value.trim();
-        let space_image = document.getElementById('space-picture').value.trim();
-        let space_description = document.getElementById('space-description').value.trim();
-        if (space_name.length) { 
-          $.ajax({
-            type: 'POST',
-            url: '/create_space',
-            dataType: "json",
-            data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
-            contentType: 'application/json;charset=UTF-8',
-            success: function(data) {
-              if ('success' in data) {
-                alert('You may only create up to 3 spaces.');
-              }
-              else {
-                document.getElementById("create-space").style.display = "none";
-                $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
-                $(document.getElementById(current_space)).attr('style', '');
-                let newNode = document.createElement('li');
-                newNode.className = 'space-wrapper';
-                let newNodeChild = document.createElement('img');
-                newNodeChild.className = 'space pointer';
-                newNodeChild.id = data.space_id;
-                newNodeChild.setAttribute('data-name', space_name);
-                newNodeChild.style.borderRadius = '3px';
-                newNodeChild.src = data.space_image;
-                newNode.appendChild(newNodeChild);
-                newNodeChild = document.createElement('div');
-                newNodeChild.className = 'active-space';
-                newNodeChild.style.width = '39px'
-                newNode.appendChild(newNodeChild);
-                referenceNode = document.getElementById('space_align_helper');
-                referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-                current_space = data.space_id;
-                space();
-              }
+        $.ajax({
+          type:'POST',
+          url: '/confirm_approve_space',
+          dataType: "json",
+          data: JSON.stringify({'request_id': this.parentElement.parentElement.id}),
+          contentType: 'application/json;charset=UTF-8',
+          success: function(space_data) {
+            let space_name = space_data['space_name'].trim();
+            let space_image = space_data['space_image'].trim();
+            let space_description = space_data['space_description'].trim();
+            if (space_name.length) { 
+              $.ajax({
+                type: 'POST',
+                url: '/create_space',
+                dataType: "json",
+                data: JSON.stringify({'space_name': space_name, 'space_image': space_image, 'space_description': space_description}),
+                contentType: 'application/json;charset=UTF-8',
+                success: function(data) {
+                  if ('success' in data) {
+                    alert('You may only create up to 3 spaces.');
+                  }
+                  else {
+                    document.getElementById("create-space").style.display = "none";
+                    $(document.getElementById(current_space)).closest('.space-wrapper').find('.active-space').attr('style', '');
+                    $(document.getElementById(current_space)).attr('style', '');
+                    let newNode = document.createElement('li');
+                    newNode.className = 'space-wrapper';
+                    let newNodeChild = document.createElement('img');
+                    newNodeChild.className = 'space pointer';
+                    newNodeChild.id = data.space_id;
+                    newNodeChild.setAttribute('data-name', space_name);
+                    newNodeChild.style.borderRadius = '3px';
+                    newNodeChild.src = data.space_image;
+                    newNode.appendChild(newNodeChild);
+                    newNodeChild = document.createElement('div');
+                    newNodeChild.className = 'active-space';
+                    newNodeChild.style.width = '39px'
+                    newNode.appendChild(newNodeChild);
+                    referenceNode = document.getElementById('space_align_helper');
+                    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+                    current_space = data.space_id;
+                    space();
+                  }
+                }
+              });
             }
-          });
-        }
-      }
-*/
+          }
+        });
+      });
+
       $(document).on('click', '#space-settings-button', function() {
         let container = document.getElementById('space-settings-popup');
         if (container.style.display == 'block') {
