@@ -101,6 +101,8 @@ def render_login():
         return redirect(request.url.replace('http://', 'https://', 1), 301)
     if 'https://oneconnected.herokuapp.com' in request.url:
         return redirect('https://www.oneconnected.app')
+    if 'https://oneconnected.app' in request.url:
+        return redirect('https://www.oneconnected.app')
     if not session_expired():
         return redirect(url_for('render_main_page'))
     if request.args.get('error') != None:
