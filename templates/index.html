@@ -567,6 +567,7 @@
         }
       });
 
+      // Policy Modal
       let acceptPoliciesModal = document.getElementById("confirm-accept-policies"); 
 
       document.getElementById('confirm-accept-policies').style.display = "none"
@@ -602,14 +603,7 @@
           url: '/accept_policies',
           contentType: 'application/json;charset=UTF-8',
           success: function(data) {
-            $.ajax({
-              type: 'POST',
-              url: '/logout',
-              dataType: "json",
-              success: function(data) {
-                window.location.href = "https://www.oneconnected.app";
-              }
-            });
+            document.getElementById('confirm-accept-policies').style.display = "none";
           }
         });
       });
