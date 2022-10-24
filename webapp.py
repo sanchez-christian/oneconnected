@@ -174,6 +174,7 @@ def callback():
     
     if not collection_users.count_documents({ '_id': unique_id}, limit = 1):
         collection_users.insert_one({'_id': unique_id, 'name': users_name, 'email': users_email, 'picture': picture, 'joined': [], 'status': 'user', 'owns': 0, 'agreed': 'false'}) #check if profile picture the same !
+        session['admin'] = False
     else:
         user_status = collection_users.find_one({ '_id': unique_id})['status']
         if user_status == 'banned':
