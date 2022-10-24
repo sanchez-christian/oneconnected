@@ -568,6 +568,8 @@
       });
 
       let acceptPoliciesModal = document.getElementById("confirm-accept-policies"); 
+
+      document.getElementById('confirm-accept-policies').style.display = "none"
       
       $.ajax({
         type:'POST',
@@ -575,10 +577,10 @@
         contentType: 'application/json;charset=UTF-8',
         success: function(data) {
           if(data == 'true') {
-            document.getElementById('confirm-accept-policies').style.display = "none"
+            document.getElementById('confirm-accept-policies').style.display = "none";
           }
           else {
-            document.getElementById('confirm-accept-policies').style.display = "block"
+            document.getElementById('confirm-accept-policies').style.display = "block";
           }
         }
       });
